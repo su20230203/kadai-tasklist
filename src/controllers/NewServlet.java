@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.sql.Timestamp;
-import javax.persistence.EntityManager;
+
 import models.Task;
-import utils.DBUtil;
+
 
 import javax.servlet.RequestDispatcher;
 
@@ -43,35 +42,7 @@ public class NewServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/new.jsp");
         rd.forward(request, response);
 
-        //EntityManager em = DBUtil.createEntityManager();
-            //em.getTransaction().begin();
-
-            // Taskのインスタンスを生成
-            //Task t = new Task();
-
-            // tの各フィールドにデータを代入
-            //String title = "taro";
-            //t.setTitle(title);
-
-            //String content = "hello";
-            //t.setContent(content);
-
-            //Timestamp currentTime = new Timestamp(System.currentTimeMillis());     // 現在の日時を取得
-            //t.setCreated_at(currentTime);
-            //t.setUpdated_at(currentTime);
-
-            // データベースに保存
-            //em.persist(t);
-           // em.getTransaction().commit();
-
-            // 自動採番されたIDの値を表示
-            //response.getWriter().append(Integer.valueOf(t.getId()).toString());
-
-            //em.close();
          }
-
-        // TODO Auto-generated method stub
-        //response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
 
