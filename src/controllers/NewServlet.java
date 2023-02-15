@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import models.Task;
 import utils.DBUtil;
 
+import javax.servlet.RequestDispatcher;
+
 /**
  * Servlet implementation class NewServlet
  */
@@ -31,31 +33,41 @@ public class NewServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            EntityManager em = DBUtil.createEntityManager();
-            em.getTransaction().begin();
+
+        // CSRF対策
+        request.setAttribute("_token", request.getSession().getId());
+
+        // おまじないとしてのインスタンスを生成
+        request.setAttribute("task", new Task());
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/new.jsp");
+        rd.forward(request, response);
+
+        //EntityManager em = DBUtil.createEntityManager();
+            //em.getTransaction().begin();
 
             // Taskのインスタンスを生成
-            Task t = new Task();
+            //Task t = new Task();
 
             // tの各フィールドにデータを代入
             //String title = "taro";
             //t.setTitle(title);
 
-            String content = "hello";
-            t.setContent(content);
+            //String content = "hello";
+            //t.setContent(content);
 
-            Timestamp currentTime = new Timestamp(System.currentTimeMillis());     // 現在の日時を取得
-            t.setCreated_at(currentTime);
-            t.setUpdated_at(currentTime);
+            //Timestamp currentTime = new Timestamp(System.currentTimeMillis());     // 現在の日時を取得
+            //t.setCreated_at(currentTime);
+            //t.setUpdated_at(currentTime);
 
             // データベースに保存
-            em.persist(t);
-            em.getTransaction().commit();
+            //em.persist(t);
+           // em.getTransaction().commit();
 
             // 自動採番されたIDの値を表示
-            response.getWriter().append(Integer.valueOf(t.getId()).toString());
+            //response.getWriter().append(Integer.valueOf(t.getId()).toString());
 
-            em.close();
+            //em.close();
          }
 
         // TODO Auto-generated method stub
